@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>Weather Dashboard</h1>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        .card {
+            float: left;
+        }
+    </style>
+
+    <h2>Search for a City:</h2>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="City" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <!-- https://openweathermap.org/api -->
+    <!-- https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+    the above is for the geolocator if I can figure out how to use it -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">City and Date</h5>
+
+            <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Temp: </li>
+                    <li class="list-group-item">Humidity: </li>
+                    <li class="list-group-item">Wind Speed: </li>
+                    <li class="list-group-item">UV Index: </li>
+                </ul>
+            </p>
+
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <!-- Try to use something else other than all these breaks -->
+    <div id="current">
+        <div class="city"></div>
+        <div class="date"></div>
+        <!-- needs icon image (visual representation of weather conditions) -->
+        <div class="temperature"></div>
+        <div class="humidity"></div>
+        <div class="wind_speed"></div>
+        <div class="UV_index"></div>
+    </div>
+    <!-- Include a search history so that users can access their past search terms *drop down box?* clicking on the city
+name should perform a new search that returns current and future conditions for that city -->
+    <!-- 5 day forecast -->
+    <div id="fiveday">
+        <div class="date"></div>
+        <div class="image"></div>
+        <div class="temp5"></div>
+        <div class="humidity5"></div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Day One</h5>
+                <p class="card-text">Think of something to go in here </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temp: </li>
+                <li class="list-group-item">Humidity: </li>
+            </ul>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Day One</h5>
+                <p class="card-text">Think of something to go in here </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temp: </li>
+                <li class="list-group-item">Humidity: </li>
+            </ul>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Day Two</h5>
+                <p class="card-text">Think of something to go in here </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temp: </li>
+                <li class="list-group-item">Humidity: </li>
+            </ul>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Day Three</h5>
+                <p class="card-text">Think of something to go in here </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temp: </li>
+                <li class="list-group-item">Humidity: </li>
+            </ul>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Day Four</h5>
+                <p class="card-text">Think of something to go in here </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temp: </li>
+                <li class="list-group-item">Humidity: </li>
+            </ul>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Day Five</h5>
+                <p class="card-text">Think of something to go in here </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temp: </li>
+                <li class="list-group-item">Humidity: </li>
+            </ul>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            // This is Carina's personal API key
+            var APIKey = "a4af8bd3c9453f28d775a17a4db79327";
+            // Here we are building the URL we need to query the database
+            var queryURL = "https://api.openweathermap.org/data/2.5/weather?" + APIKey;
+            // Here we run our AJAX call to the OpenWeatherMap API
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                // We store all of the retrieved data inside of an object called "response"
+                .then(function (response) {
+                    // Log the queryURL
+                    console.log(queryURL);
+                    // Log the resulting object
+                    console.log(response);
+                    // Transfer content to HTML
+                    $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+                    $(".wind").text("Wind Speed: " + response.wind.speed);
+                    $(".humidity").text("Humidity: " + response.main.humidity);
+                    $(".temp").text("Temperature (F) " + response.main.temp);
+                    // Log the data in the console as well
+                    console.log("Wind Speed: " + response.wind.speed);
+                    console.log("Humidity: " + response.main.humidity);
+                    console.log("Temperature (F): " + response.main.temp);
+                });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
