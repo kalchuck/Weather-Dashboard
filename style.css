@@ -1,0 +1,55 @@
+.container{
+    border:1px solid lightgray;
+    border-radius: 10px;
+    margin:20px;
+    padding:7px;
+    width: 100%;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.sidebar{
+    border: ;
+    padding:5px;
+    margin:5px;
+}
+
+.main{
+    border: ;
+    padding:2px;
+    margin:2px;
+    float: right;
+    background-color:;
+}
+
+.card{
+    padding:10px;
+    display: inline-block;
+}
+
+#fiveday{
+    float: left;
+}
+
+#fivedaycard{
+    float:left;
+    /* background-color:rgb(20, 63, 255); */
+    width: 7rem;
+    margin:5px;
+    padding:4px;
+}
+
+@media screen and (max-width: 960px) {
+    /* The body's bg color will be #333 */
+    body {
+      background-color:rgb(202, 245, 202);
+    }
+  
+    .container, .main, .row{
+      max-width: 100%;
+      float: left;
+    }
+
+  }
